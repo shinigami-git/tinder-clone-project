@@ -3,6 +3,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import ForumIcon from "@material-ui/icons/Forum";
 import IconButton from "@material-ui/core/IconButton";
 import "./header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -15,9 +16,11 @@ const Header = () => {
         src="https://www.thelogocreative.co.uk/wp-content/uploads/2017/09/Screen-Shot-2017-08-17-at-10.04.531.png"
         alt="tinder-logo"
       />
+      <Link to="/chat">
       <IconButton className="header-icon-button">
         <ForumIcon className="header-icons" fontSize="large" />
       </IconButton>
+      </Link>
     </div>
   );
 };
