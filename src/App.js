@@ -6,8 +6,8 @@ import ChatScreen from "./components/ChatScreen/ChatScreen";
 import Header from "./components/Header/Header";
 import SwipeButtons from "./components/SwipeButtons/SwipeButtons";
 import TinderCards from "./components/TinderCards/TinderCards";
-import {db} from "./db"
-
+import { db } from "./db";
+// import faker from "faker";
 // const db = [
 //   {
 //     name: "Emma Watson",
@@ -19,8 +19,8 @@ import {db} from "./db"
 //       "https://wallpapersdsc.net/wp-content/uploads/2016/01/Kristen-Stewart-Wallpaper.jpg",
 //   },
 // ];
-const alreadyRemoved = [];
-let charactersState = db;
+// const alreadyRemoved = [];
+// let charactersState = db;
 
 function App() {
   // const [peopleOptions, setPeopleOptions] = useState([
@@ -36,8 +36,13 @@ function App() {
   //     }
   //   ]
   // ]);
+  const [alreadyRemoved, setAlreadyRemoved] = useState([]);
   const [peopleOptions, setPeopleOptions] = useState(db);
   const [lastDirection, setLastDirection] = useState();
+  const [liked, setLiked] = useState([]);
+  const [superLiked, setSuperLiked] = useState([]);
+  const [disLiked, setDisLiked] = useState([]);
+  // const [charactersState, setCharactersState] = useState(db);
   const childRefs = useMemo(
     () =>
       Array(peopleOptions.length)
@@ -45,35 +50,61 @@ function App() {
         .map((i) => React.createRef()),
     []
   );
+  // console.log(childRefs);
 
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route path="/chat/:person" exact>
-            <Header backButton="/chat" />
+            <Header
+              backButton="/chat"
+              alreadyRemoved={alreadyRemoved}
+              setAlreadyRemoved={setAlreadyRemoved}
+            />
             <ChatScreen />
           </Route>
 
           <Route path="/chat" exact>
-            <Header backButton="/" />
+            <Header
+              backButton="/"
+              alreadyRemoved={alreadyRemoved}
+              setAlreadyRemoved={setAlreadyRemoved}
+            />
             <Chats />
           </Route>
           <Route path="/" exact>
-            <Header />
+            <Header
+              alreadyRemoved={alreadyRemoved}
+              setAlreadyRemoved={setAlreadyRemoved}
+            />
             <TinderCards
               peopleOptions={peopleOptions}
               setPeopleOptions={setPeopleOptions}
               childRefs={childRefs}
               alreadyRemoved={alreadyRemoved}
+              setAlreadyRemoved={setAlreadyRemoved}
               lastDirection={lastDirection}
               setLastDirection={setLastDirection}
+              liked={liked}
+              setLiked={setLiked}
+              superLiked={superLiked}
+              setSuperLiked={setSuperLiked}
+              disLiked={disLiked}
+              setDisLiked={setDisLiked}
             />
             <SwipeButtons
               peopleOptions={peopleOptions}
               setPeopleOptions={setPeopleOptions}
               childRefs={childRefs}
               alreadyRemoved={alreadyRemoved}
+              setAlreadyRemoved={setAlreadyRemoved}
+              liked={liked}
+              setLiked={setLiked}
+              superLiked={superLiked}
+              setSuperLiked={setSuperLiked}
+              disLiked={disLiked}
+              setDisLiked={setDisLiked}
             />
           </Route>
           {/* Tinder Cards */}
